@@ -1,0 +1,17 @@
+.information-row:hover {
+  background-color: lightgrey; /* Adjust the color as needed */
+}
+
+.light-gray-bg-hover,
+.white-bg-hover {
+  font-size: larger;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.light-gray-bg-hover {
+  background-color: rgb(244, 240, 240); /* Light gray background color */
+}
+
+.white-bg-hover {
+  background-color: #ffffff; /* White background color */
+}

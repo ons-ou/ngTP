@@ -1,0 +1,10 @@
+<div *ngIf="cv" class="row">
+  <img
+    class="col-7"
+    width="60px"
+    heigth="60px"
+    src="assets/images/{{ cv.path | defaultImage }}"
+    alt="{{ cv.name }}"
+  />
+  <h5 class="col-5 pt-4">{{ cv.firstname }} {{ cv.name }}</h5>
+</div>

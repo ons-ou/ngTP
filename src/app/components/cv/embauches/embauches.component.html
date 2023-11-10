@@ -1,0 +1,10 @@
+<div *ngIf="cvs.length !== 0"><h3>
+    Liste des Cvs sélectionnés pour embauche:
+  </h3>
+  <div class="row border border-primary border-round rounded m-4"
+  >
+    <div *ngFor="let cv of cvs" class="col-3 p-4">
+      <app-embauche-item [cv]="cv"></app-embauche-item>
+  </div>
+  
+</div>
