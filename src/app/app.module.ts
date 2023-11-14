@@ -3,28 +3,27 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+
 import { HighlightDirective } from './directives/highlight/highlight.directive';
 import { DefaultImagePipe } from './pipes/default-image/default-image.pipe';
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
-import { CvComponent } from './components/cv/cv/cv.component';
-import { ListComponent } from './components/cv/list/list.component';
-import { CardComponent } from './components/cv/card/card.component';
-import { ItemComponent } from './components/cv/item/item.component';
 import { Nf404Component } from './components/nf404/nf404.component';
 import { MiniWordComponent } from './components/mini-word/mini-word.component';
 import { RainbowDirective } from './directives/rainbow/rainbow.directive';
 import { TextInputComponent } from './components/text-input/text-input.component';
-import { EmbauchesComponent } from './components/cv/embauches/embauches.component';
 import { ToastrModule } from 'ngx-toastr';
 import { HttpClient } from '@angular/common/http';
-import { DetailsComponent } from './components/cv/details/details.component';
-import { EmbaucheItemComponent } from './components/cv/embauche-item/embauche-item.component';
 import { LoginComponent } from './components/login/login.component';
+import { CardComponent } from './cv/components/card/card.component';
+import { CvComponent } from './cv/components/cv/cv.component';
+import { DetailsComponent } from './cv/components/details/details.component';
+import { EmbauchesComponent } from './cv/components/embauches/embauches.component';
+import { ItemComponent } from './cv/components/item/item.component';
+import { ListComponent } from './cv/components/list/list.component';
 
 
 @NgModule({
@@ -43,7 +42,6 @@ import { LoginComponent } from './components/login/login.component';
     TextInputComponent,
     EmbauchesComponent,
     DetailsComponent,
-    EmbaucheItemComponent,
     LoginComponent
   ],
   imports: [

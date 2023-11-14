@@ -1,8 +1,8 @@
 import { Component, inject } from '@angular/core';
-import { Cv } from '../../../models/cv';
-import { CvService } from '../../../services/cv/cv.service';
+import { Cv } from '../../models/cv';
+import { CvService } from '../../services/cv/cv.service';
 import { Observable } from 'rxjs';
-import { EmbaucheService } from '../../../services/emauche/embauche.service';
+import { EmbaucheService } from '../../services/emauche/embauche.service';
 
 @Component({
   selector: 'app-card',

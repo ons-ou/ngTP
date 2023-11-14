@@ -10,14 +10,12 @@ import { AuthService } from '../../services/auth/auth.service';
 export class NavbarComponent {
 
   isLoggedIn$ : Observable<boolean>
+  isLoggedOut$ : Observable<boolean>
   authService = inject(AuthService)
 
   constructor(){
-    this.isLoggedIn$ = this.authService.isLoggedIn;
-
-    this.authService.isLoggedIn.subscribe(
-      (res)=>{ console.log(res)}
-    )
+    this.isLoggedIn$ = this.authService.isLoggedIn$;
+    this.isLoggedOut$ = this.authService.isLoggedOut$;
   }
 
   logout(){

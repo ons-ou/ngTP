@@ -8,6 +8,9 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 })
 export class MiniWordComponent {
 
+  color = "black"
+  font ="Arial"
+  size = 15
   fontOptions: string[] = [
     'Arial',
     'Helvetica',

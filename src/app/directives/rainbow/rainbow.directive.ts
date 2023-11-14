@@ -5,15 +5,16 @@ import { Directive, HostBinding, HostListener } from '@angular/core';
 })
 export class RainbowDirective {
 
-  colors: string[] = [
-    '#ff0000', // Red
-    '#00ff00', // Green
-    '#0000ff', // Blue
-    '#ffff00', // Yellow
-    '#ff00ff', // Magenta
-    '#00ffff', // Cyan
-  ];
-
+ generateRandomColor(): string {
+    const letters = '0123456789ABCDEF';
+    let color = '#';
+  
+    for (let i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+  
+    return color;
+  }
 
   @HostBinding("style.color")
   @HostBinding("style.borderColor")
@@ -23,8 +24,6 @@ export class RainbowDirective {
 
   @HostListener("keyup")
   onMouseEnter() {
-    console.log(Math.floor((Math.random() * 10) % 6))
-    this.bgc = this.colors[Math.floor((Math.random() * 10) % 6)]
+    this.bgc = this.generateRandomColor()
   }
-
 }

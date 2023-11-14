@@ -3,76 +3,69 @@ import { Injectable, inject } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { loginDto } from '../../dtos/login.dto';
 import { Response } from '../../dtos/response.dto';
-import { BehaviorSubject, catchError, map } from 'rxjs';
+import { BehaviorSubject, Observable, catchError, map, tap } from 'rxjs';
 import { Router } from '@angular/router';
+import { User } from '../../models/user';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
-
   http = inject(HttpClient);
   toaster = inject(ToastrService);
-  router = inject(Router)
-  
-  isLoggedIn : BehaviorSubject<boolean> = new BehaviorSubject(false);
+  router = inject(Router);
 
-  constructor() { 
+  isLoggedIn$ : Observable<boolean>
+  user = new BehaviorSubject<User | null>(null);
+  isLoggedOut$ :Observable<boolean>
 
-    const token = localStorage.getItem("token")
-    
-    if (token !== null){
+  loginUser(user: User) {
+    this.user.next(user);
+  }
 
-      this.isLoggedIn.next(true);
+  constructor() {
+    const user = localStorage.getItem('user');
+
+    this.isLoggedIn$ = this.user.pipe(
+      map((res)=>{
+        if (res == null)
+          return false
+        return true
+      })
+    )
+
+    this.isLoggedOut$ = this.user.pipe(
+      map((res)=>{
+        if (res == null)
+          return true
+        return false
+      })
+    )
+
+    if (user !== null) {
+      this.loginUser(JSON.parse(user));
+    } else {
+      this.logout();
     }
-    else this.isLoggedIn.next(false)
   }
 
-  public isTokenExpired(token: String): boolean {
-    const base64Url = token.split('.')[1];
-    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-    const jsonPayload = decodeURIComponent(
-      atob(base64)
-        .split('')
-        .map(function (c) {
-          return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-        })
-        .join('')
-    );
-
-    const { exp } = JSON.parse(jsonPayload);
-    const expired = Date.now() >= exp * 1000;
-    return expired;
-  }
-
-  login(dto: loginDto)  {
-    return this.http.post<Response>('https://apilb.tridevs.net/api/Users/login', dto)
-    .subscribe(
-      {
-        next: (res) =>{
-          console.log(res);
-          localStorage.setItem("token", res.id);
+  login(dto: loginDto) {
+    return this.http
+      .post<Response>('https://apilb.tridevs.net/api/Users/login', dto)
+      .pipe(
+        tap((res) =>{
           const user = {
             email: dto.email,
-            password: dto.password
-          }
-          localStorage.setItem("user", JSON.stringify(user));
-          
-          this.isLoggedIn.next(true);
-          
-          this.router.navigate(['cv'])
-        },
-        error: (err)=>{
-          this.toaster.error(`${err.status} - ${err.statusText}`);
-        }
-      }
-    )
+            id: res.userId,
+          };
+          localStorage.setItem('user', JSON.stringify(user));
+          this.loginUser(user);   
+        }),
+      )
   }
 
-  logout(){
-    localStorage.removeItem("token");
-    this.isLoggedIn.next(false);
+  logout() {
+    localStorage.removeItem("user");
+    this.user.next(null);
   }
-  
 }
-

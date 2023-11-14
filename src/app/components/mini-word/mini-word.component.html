@@ -1,9 +1,9 @@
 <div class="container">
   <p
     [ngStyle]="{
-      'font-family': fontInput.value,
-      'font-size': sizeInput.value + 'px',
-      color: colorInput.value
+      'font-family': font,
+      'font-size': size + 'px',
+      color: color
     }"
   >
     Text
@@ -11,24 +11,22 @@
   <div class="row">
     <div class="col-4">
       <input
-        #colorInput
         type="color"
         class="form-control"
-        [(ngModel)]="colorInput.value"
+        [(ngModel)]="color"
       />
     </div>
     <div class="col-4">
       <input
-        #sizeInput
         type="number"
         class="form-control"
         [defaultValue]="15"
-        [(ngModel)]="sizeInput.value"
+        [(ngModel)]="size"
       />
     </div>
     <div class="col-4">
-      <select #fontInput id="fontSelect" class="form-control"
-      [(ngModel)]="fontInput.value">
+      <select  id="fontSelect" class="form-control"
+      [(ngModel)]="font">
         <option *ngFor="let font of fontOptions" [value]="font">
           {{ font }}
         </option>

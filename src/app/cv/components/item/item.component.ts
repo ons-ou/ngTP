@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output, inject } from "@angular/core";
-import { Cv } from "../../../models/cv";
-import { CvService } from "../../../services/cv/cv.service";
+import { Cv } from "../../models/cv";
+import { CvService } from "../../services/cv/cv.service";
 
 @Component({
   selector: "app-item",
@@ -12,6 +12,12 @@ export class ItemComponent {
     required: true,
   })
   cv: Cv | null = null;
+
+  @Input()
+  height = 50
+
+  @Input()
+  fontSize = 15
 
   cvService = inject(CvService)
 
