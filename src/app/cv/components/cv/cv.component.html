@@ -1,6 +1,20 @@
+<app-search/>
 <div class="row">
     <div class="col">
-      <app-list [cvs]="cvs$ | async"></app-list>
+      <div class="card text-center">
+        <div class="card-header">
+          <ul class="nav nav-tabs card-header-tabs">
+            <li class="nav-item">
+              <a class="nav-link" [ngClass]="{'active': cvs == juniors}" (click)="showJuniors()">Juniors</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" [ngClass]="{'active': cvs == seniors}" (click)="showSeniors()">Seniors</a>
+            </li>
+          </ul>
+        </div>
+          <app-list [cvs]="cvs" 
+          [onItemClick]="onCvSelect"></app-list>
+      </div>
     </div>
     <div class="col">
       <app-card></app-card>

@@ -21,6 +21,7 @@ export class EmbaucheService {
   addCv( cv: Cv){
     if (this.embauches.findIndex((c)=> c.id == cv.id) == -1){
       this.embauches.push(cv)
+      this.toast.success(`Le candidat ${cv.firstname} ${cv.name} a été ajouté`)
     } else {
       this.toast.warning(`Le candidat ${cv.firstname} ${cv.name} est déja embauché`)
     }

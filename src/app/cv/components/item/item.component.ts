@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output, inject } from "@angular/core";
 import { Cv } from "../../models/cv";
 import { CvService } from "../../services/cv/cv.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-item",
@@ -17,15 +18,15 @@ export class ItemComponent {
   height = 50
 
   @Input()
+  onClick!: (cv: Cv)=> void;
+
+  @Input()
   fontSize = 15
 
   cvService = inject(CvService)
+  router = inject(Router)
 
   constructor(){
     
-  }
-
-  onSelectCv() {
-    this.cvService.selectCv(this.cv!);
   }
 }

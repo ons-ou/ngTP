@@ -6,13 +6,33 @@ import { TextInputComponent } from './components/text-input/text-input.component
 import { LoginComponent } from './components/login/login.component';
 import { CvComponent } from './cv/components/cv/cv.component';
 import { DetailsComponent } from './cv/components/details/details.component';
+import { RxJsComponent } from './components/rx-js/rx-js.component';
+import { cvResolver } from './cv/resolvers/cv/cv.resolver';
+import { detailsResolver } from './cv/resolvers/details/details.resolver';
+import { MasterDetailsComponent } from './cv/components/master-details/master-details.component';
 
 const routes: Routes = [
   {
     path: 'cv',
     children: [
-      { path: '', component: CvComponent },
-      { path: ':id', component: DetailsComponent },
+      { path: '', component: CvComponent, resolve: { cvs: cvResolver } },
+      {
+        path: 'list',
+        component: MasterDetailsComponent,
+        children: [
+          {
+            path: ':id',
+            component: DetailsComponent,
+            resolve: { cv: detailsResolver },
+          },
+        ],
+      },
+      {
+        path: ':id',
+        component: DetailsComponent,
+        resolve: { cv: detailsResolver },
+      },
+
     ],
   },
   {
@@ -22,6 +42,10 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
+  },
+  {
+    path: 'rxjs',
+    component: RxJsComponent,
   },
   {
     path: 'directive',

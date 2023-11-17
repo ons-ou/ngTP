@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { Cv } from '../../models/cv';
 import { Observable, Subject, catchError, map, of } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { EmbaucheService } from '../emauche/embauche.service';
@@ -11,7 +11,8 @@ import { EmbaucheService } from '../emauche/embauche.service';
 })
 export class CvService {
   http = inject(HttpClient);
-  embaucheService = inject(EmbaucheService)
+  embaucheService = inject(EmbaucheService);
+  url = 'https://apilb.tridevs.net/api/personnes/';
 
   cvs: Cv[] = [
     new Cv(1, 'sellaouti', 'aymen', 145, 'teacher', 'as.jpg', 45),
@@ -32,20 +33,27 @@ export class CvService {
   }
 
   getCvs(): Observable<Cv[]> {
-    return this.http.get<Cv[]>('https://apilb.tridevs.net/api/personnes').pipe(
+    return this.http.get<Cv[]>(this.url).pipe(
       map((cvs) => {
         this.cvs = cvs;
         return cvs;
       }),
       catchError(() => {
+      //  this.toaster.error('Erreur de récupération de données');
         return of(this.cvs);
       })
     );
   }
 
+  getCvsByName(name: string): Observable<any[]> {
+    const params = new HttpParams().set('filter', JSON.stringify({where:{name:{like:`%${name}%`}}}));
+
+    return this.http.get<Cv[]>(this.url, { params });
+  }
+
   getCv(id: number): Observable<Cv | null> {
     return this.http
-      .get<Cv>('https://apilb.tridevs.net/api/personnes/' + id)
+      .get<Cv>(this.url+ id)
       .pipe(
         map((cv) => cv),
         catchError((err) => {
@@ -68,6 +76,6 @@ export class CvService {
 
   deleteCv(id: number) : Observable<any> {
     return this.http
-      .delete('https://apilb.tridevs.net/api/personnes/' + id)
+      .delete(this.url + id)
   }
 }

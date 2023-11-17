@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
@@ -24,6 +24,9 @@ import { DetailsComponent } from './cv/components/details/details.component';
 import { EmbauchesComponent } from './cv/components/embauches/embauches.component';
 import { ItemComponent } from './cv/components/item/item.component';
 import { ListComponent } from './cv/components/list/list.component';
+import { SearchComponent } from './cv/components/search/search.component';
+import { RxJsComponent } from './components/rx-js/rx-js.component';
+import { MasterDetailsComponent } from './cv/components/master-details/master-details.component';
 
 
 @NgModule({
@@ -42,12 +45,16 @@ import { ListComponent } from './cv/components/list/list.component';
     TextInputComponent,
     EmbauchesComponent,
     DetailsComponent,
-    LoginComponent
+    LoginComponent,
+    SearchComponent,
+    RxJsComponent,
+    MasterDetailsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
     CommonModule,
     RouterModule,
     HttpClientModule,

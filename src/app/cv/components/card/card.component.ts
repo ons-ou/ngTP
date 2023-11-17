@@ -22,7 +22,6 @@ export class CardComponent {
 
   onClick(cv: Cv){
     this.embaucheService.addCv(cv);
-    console.log(this.embaucheService.getCvs())
   }
 
 }

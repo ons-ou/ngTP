@@ -11,6 +11,9 @@ export class ListComponent {
   @Input()
   cvs: Cv[] | null = []
 
+  @Input()
+  onItemClick!: (cv: Cv)=>void;
+
   isHidden = true;
 
   constructor() {

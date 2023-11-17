@@ -2,11 +2,14 @@
     <li
       [ngClass]="{
         'list-group-item-primary': isOdd,
-        'list-g roup-item-secondary': !isOdd
+        'list-group-item-secondary': !isOdd
       }"
       *ngFor="let cv of cvs; let isOdd = odd"
       class="list-group-item"
     >
-      <app-item [cv]="cv" [height]="50" [fontSize]="15"></app-item>
+    <div >
+      <app-item [cv]="cv" [height]="50" [fontSize]="15"
+      [onClick]="onItemClick"></app-item>
+    </div>
     </li>
   </ol>

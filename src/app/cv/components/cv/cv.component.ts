@@ -1,26 +1,40 @@
 import { Component, inject } from '@angular/core';
-import { Observable, catchError, of } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { Cv } from '../../models/cv';
 import { CvService } from '../../services/cv/cv.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-cv',
   templateUrl: './cv.component.html',
-  styleUrl: './cv.component.css'
+  styleUrl: './cv.component.css',
 })
 export class CvComponent {
-
-  cvs$: Observable<Cv[]>
+  cvs: Cv[];
+  juniors: Cv[];
+  seniors: Cv[];
   cvService = inject(CvService);
-  toaster = inject(ToastrService)
+  route = inject(ActivatedRoute);
+  toaster = inject(ToastrService);
 
-  constructor(){
-    this.cvs$ = this.cvService.getCvs().pipe(
-      catchError((res)=> {
-        this.toaster.error('Erreur de récupération de donnés');
-        return of(res);
-      })
-    )
+  constructor() {
+    const cvs : Cv[] = this.route.snapshot.data['cvs'];
+
+    this.juniors = cvs.filter((cv) => cv.age < 40);
+    this.seniors = cvs.filter((cv) => cv.age >= 40);
+
+    this.cvs = this.juniors;
+  }
+
+  showSeniors() {
+    this.cvs = this.seniors;
+  }
+
+  showJuniors() {
+    this.cvs = this.juniors;
+  }
+
+  onCvSelect(cv: Cv) {
+    this.cvService.selectCv(cv);
   }
 }
