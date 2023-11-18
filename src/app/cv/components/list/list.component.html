@@ -1,16 +1,21 @@
 <ol ngIfclass="list-group">
-    <li
-      [ngClass]="{
-        'list-group-item-primary': isOdd,
-        'list-group-item-secondary': !isOdd,
-        'list-group-item-white': !switchItemColor
-      }"
-      *ngFor="let cv of cvs; let isOdd = odd"
-      class="list-group-item"
-    >
-    <div >
-      <app-item [cv]="cv" [height]="50" [fontSize]="15"
-      [onClick]="onItemClick"></app-item>
+  <li
+    [ngClass]="{
+      'list-group-item-primary': isOdd && switchItemColor,
+      'list-group-item-secondary': !isOdd && switchItemColor,
+      'list-group-item-white': !switchItemColor
+    }"
+    *ngFor="let cv of cvs; let isOdd = odd"
+    class="list-group-item"
+  >
+    <div (click)="onItemClick(cv)">
+      <app-item
+        [title]="cv.firstname + ' '+ cv.name"
+        [path]="'assets/images/' + (cv.path | defaultImage)"
+        [height]="50"
+        [fontSize]="15"
+      >
+      </app-item>
     </div>
-    </li>
-  </ol>
+  </li>
+</ol>

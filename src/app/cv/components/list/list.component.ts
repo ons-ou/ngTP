@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { Cv } from '../../models/cv';
+import { CvService } from '../../services/cv/cv.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-list',
@@ -16,6 +18,9 @@ export class ListComponent {
 
   @Input()
   switchItemColor = true
+
+  cvService = inject(CvService);
+  router = inject(Router)
 
   isHidden = true;
 

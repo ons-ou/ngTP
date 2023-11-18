@@ -4,7 +4,12 @@
   <div class="row border border-primary border-round rounded m-4"
   >
     <div *ngFor="let cv of embauches" class="col-3 p-4">
-      <app-item [cv]="cv" [height]="150" [fontSize]="20"></app-item>
-  </div>
+        <app-item
+        [title]="cv.firstname + ' '+ cv.name"
+        [path]="'assets/images/' + (cv.path | defaultImage)"
+        [height]="150"
+        [fontSize]="20"
+      >
+      </app-item>  </div>
   
 </div>

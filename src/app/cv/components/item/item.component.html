@@ -1,12 +1,12 @@
-<div *ngIf="cv" (click)="onClick(cv)" class="d-flex align-items-start p-3">
+<div *ngIf="title !== '' " class="d-flex align-items-start p-3">
   <img
     class="rounded-circle p-0"
     [style.width]="height + 'px'"
     [style.height]="height + 'px'"
-    src="assets/images/{{ cv.path | defaultImage }}"
-    alt="{{ cv.name }}"
+    src="{{path}}"
+    alt="{{ title }}"
   />
   <div [style.fontSize]="fontSize + 'px'" class="pt-3">
-    {{ cv.firstname }} {{ cv.name }}
+    {{ title }}
   </div>
 </div>

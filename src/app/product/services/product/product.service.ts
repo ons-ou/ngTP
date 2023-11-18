@@ -15,7 +15,6 @@ export class ProductService {
 
   getAll(take: number, skip: number = 0): Observable<Product[]> {
     const url = `${this.apiUrl}?skip=${skip}&limit=${take}`;
-    console.log(url)
 
     return this.http.get<{products: Product[]}>(url).pipe(
       map((res)=> res.products)

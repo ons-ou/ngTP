@@ -13,15 +13,20 @@ export class ProductComponent {
   products$ = new Observable<Product[]>();
   numberElements$ = new BehaviorSubject<number>(0);
 
+  loading = true;
+
   constructor() {
     this.products$ = this.numberElements$.pipe(
       switchMap((skip) => this.productService.getAll(12, skip)),
-      scan((acc, res)=> [...acc, ...res])
+      scan((acc, res)=> {
+        return [...acc, ...res]
+      })
     );
   }
   
   showMore(): void {
     const nextPage = this.numberElements$.value + 12;
     if (nextPage <= 100) this.numberElements$.next(nextPage);
+    else this.numberElements$.complete();
   }
 }
