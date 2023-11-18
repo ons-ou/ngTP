@@ -1,4 +1,4 @@
-<div>
+<div class="bg-white">
   <input [formControl]="searchName" type="text" class="form-control" />
-  <app-list [cvs]="cvs$ | async" [onItemClick]="onItemClick"/>
+  <app-list [cvs]="cvs$ | async" [onItemClick]="onItemClick" [switchItemColor]="false"/>
 </div>

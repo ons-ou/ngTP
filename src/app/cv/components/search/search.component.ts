@@ -27,6 +27,6 @@ export class SearchComponent {
   }
 
   onItemClick(cv: Cv){
-    this.router.navigate([cv.id])
+    this.router.navigate(['cv', cv.id])
   }
 }

@@ -2,7 +2,8 @@
     <li
       [ngClass]="{
         'list-group-item-primary': isOdd,
-        'list-group-item-secondary': !isOdd
+        'list-group-item-secondary': !isOdd,
+        'list-group-item-white': !switchItemColor
       }"
       *ngFor="let cv of cvs; let isOdd = odd"
       class="list-group-item"

@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { EmbaucheService } from '../../services/emauche/embauche.service';
 import { Cv } from '../../models/cv';
 
@@ -9,12 +9,7 @@ import { Cv } from '../../models/cv';
 })
 export class EmbauchesComponent {
 
-  embaucheService = inject(EmbaucheService)
-
-  cvs : Cv[] = []
-
-  constructor(){
-    this.cvs = this.embaucheService.getCvs()
-  }
+  @Input()
+  embauches: Cv[] = []
 
 }

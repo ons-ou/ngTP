@@ -14,6 +14,9 @@ export class ListComponent {
   @Input()
   onItemClick!: (cv: Cv)=>void;
 
+  @Input()
+  switchItemColor = true
+
   isHidden = true;
 
   constructor() {
