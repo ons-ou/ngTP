@@ -1,0 +1,12 @@
+<div class="container">
+  <button class="btn btn-danger" (click)="showMore()">Load More</button>
+
+  <div class="alert alert-info">
+    Nombre de produits: {{ (products$ |async)?.length }}
+  </div>
+  <div class="row">
+    <div class="col-4" *ngFor="let product of products$ | async">
+      {{product.title}}
+    </div>
+  </div>
+</div>

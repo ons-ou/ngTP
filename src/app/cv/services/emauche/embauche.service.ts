@@ -11,7 +11,6 @@ import { BehaviorSubject, Observable } from 'rxjs';
 export class EmbaucheService {
 
   toast = inject(ToastrService)
-  embauches: Cv[] = []
  
   getEmbauches$ = new BehaviorSubject<Cv[]>([]);
   embauches$ : Observable<Cv[]>;
@@ -21,13 +20,14 @@ export class EmbaucheService {
   }
 
   getCvs(){
-    return this.embauches;
+    return this.getEmbauches$.value;
   }
 
   addCv( cv: Cv){
-    if (this.embauches.findIndex((c)=> c.id == cv.id) == -1){
-      this.embauches = [...this.embauches, cv]
-      this.getEmbauches$.next(this.embauches);
+    var embauches = this.getEmbauches$.value
+    if (embauches.findIndex((c)=> c.id == cv.id) == -1){
+      embauches = [...embauches, cv]
+      this.getEmbauches$.next(embauches);
       
       this.toast.success(`Le candidat ${cv.firstname} ${cv.name} a été ajouté`)
     } else {
@@ -36,8 +36,9 @@ export class EmbaucheService {
   }
 
   deleteCv(id: number){
-    const index = this.embauches.findIndex((cv)=> cv.id == id)
+    var embauches = this.getEmbauches$.value
+    const index = embauches.findIndex((cv)=> cv.id == id)
     if (index !== -1)
-      this.embauches.splice(index, 1)
+      embauches.splice(index, 1)
   }
 }

@@ -10,8 +10,13 @@ import { RxJsComponent } from './components/rx-js/rx-js.component';
 import { cvResolver } from './cv/resolvers/cv/cv.resolver';
 import { detailsResolver } from './cv/resolvers/details/details.resolver';
 import { MasterDetailsComponent } from './cv/components/master-details/master-details.component';
+import { ProductComponent } from './product/compnents/product/product.component';
 
 const routes: Routes = [
+  {
+    path: 'products',
+    component: ProductComponent
+  },
   {
     path: 'cv',
     children: [

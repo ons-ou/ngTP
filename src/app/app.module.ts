@@ -27,6 +27,7 @@ import { ListComponent } from './cv/components/list/list.component';
 import { SearchComponent } from './cv/components/search/search.component';
 import { RxJsComponent } from './components/rx-js/rx-js.component';
 import { MasterDetailsComponent } from './cv/components/master-details/master-details.component';
+import { ProductComponent } from './product/compnents/product/product.component';
 
 
 @NgModule({
@@ -48,7 +49,8 @@ import { MasterDetailsComponent } from './cv/components/master-details/master-de
     LoginComponent,
     SearchComponent,
     RxJsComponent,
-    MasterDetailsComponent
+    MasterDetailsComponent,
+    ProductComponent
   ],
   imports: [
     BrowserModule,

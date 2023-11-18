@@ -1,97 +1,113 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
-      <a
-        class="navbar-brand"
-        [routerLink]="['']"
-        [routerLinkActiveOptions]="{ exact: true }"
-        routerLinkActive="active text-primary"
-        >cvStartingAdvProject</a
-      >
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="['']navbarNavAltMarkup"
-        aria-controls="navbarNavAltMarkup"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
-          <a
-            class="nav-link"
-            aria-current="page"
-            [routerLink]="['cv']"
-            routerLinkActive="active text-primary"
-            >Cv</a
-          >
-        </div>
-      </div>
-      <div class="collapse navbar-collapse" id="navbp">
-        <div class="navbar-nav">
-          <a
-            class="nav-link"
-            aria-current="page"
-            [routerLink]="['mini-word']"
-            routerLinkActive="active text-primary"
-            >Mini Word</a
-          >
-        </div>
-      </div>
-
-      <div class="collapse navbar-collapse" id="navbp">
-        <div class="navbar-nav">
-          <a
-            class="nav-link"
-            aria-current="page"
-            [routerLink]="['directive']"
-            routerLinkActive="active text-primary"
-            >Directive</a
-          >
-        </div>
-      </div>
-
-      <div class="collapse navbar-collapse" id="navbp">
-        <div class="navbar-nav">
-          <a
-            class="nav-link"
-            aria-current="page"
-            [routerLink]="['rxjs']"
-            routerLinkActive="active text-primary"
-            >RxJS</a
-          >
-        </div>
-      </div>
-      
-      <div class="collapse navbar-collapse" id="navbp">
-        <div class="navbar-nav">
-          <a
-            class="nav-link"
-            aria-current="page"
-            [routerLink]="['cv', 'list']"
-            routerLinkActive="active text-primary"
-            >Master Details</a
-          >
-        </div>
-      </div>
-
-      <div class="collapse navbar-collapse" id="navbp">
-        <div class="navbar-nav">
-          <a
-            class="nav-link"
-            aria-current="page"
-            [routerLink]="['login']"
-            *ngIf="(isLoggedOut$ |async)"
-            routerLinkActive="active text-primary"
-            >Login</a
-          >
-        
-          <a *ngIf="(isLoggedIn$ |async)" class="nav-link" [routerLink]="[]"(click)="logout()">Logout</a>
-
-        </div>
+  <div class="container-fluid">
+    <a
+      class="navbar-brand"
+      [routerLink]="['']"
+      [routerLinkActiveOptions]="{ exact: true }"
+      routerLinkActive="active text-primary"
+      >cvStartingAdvProject</a
+    >
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="['']navbarNavAltMarkup"
+      aria-controls="navbarNavAltMarkup"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a
+          class="nav-link"
+          aria-current="page"
+          [routerLink]="['cv']"
+          routerLinkActive="active text-primary"
+          >Cv</a
+        >
       </div>
     </div>
-  </nav>
-  
+    <div class="collapse navbar-collapse" id="navbp">
+      <div class="navbar-nav">
+        <a
+          class="nav-link"
+          aria-current="page"
+          [routerLink]="['mini-word']"
+          routerLinkActive="active text-primary"
+          >Mini Word</a
+        >
+      </div>
+    </div>
+
+    <div class="collapse navbar-collapse" id="navbp">
+      <div class="navbar-nav">
+        <a
+          class="nav-link"
+          aria-current="page"
+          [routerLink]="['directive']"
+          routerLinkActive="active text-primary"
+          >Directive</a
+        >
+      </div>
+    </div>
+
+    <div class="collapse navbar-collapse" id="navbp">
+      <div class="navbar-nav">
+        <a
+          class="nav-link"
+          aria-current="page"
+          [routerLink]="['rxjs']"
+          routerLinkActive="active text-primary"
+          >RxJS</a
+        >
+      </div>
+    </div>
+
+    <div class="collapse navbar-collapse" id="navbp">
+      <div class="navbar-nav">
+        <a
+          class="nav-link"
+          aria-current="page"
+          [routerLink]="['cv', 'list']"
+          routerLinkActive="active text-primary"
+          >Master Details</a
+        >
+      </div>
+    </div>
+
+    <div class="collapse navbar-collapse" id="navbp">
+      <div class="navbar-nav">
+        <a
+          class="nav-link"
+          aria-current="page"
+          [routerLink]="['products']"
+          routerLinkActive="active text-primary"
+          >Products</a
+        >
+      </div>
+    </div>
+
+    <div class="collapse navbar-collapse" id="navbp">
+      <div class="navbar-nav">
+        <a
+          class="nav-link"
+          aria-current="page"
+          [routerLink]="['login']"
+          *ngIf="isLoggedOut$ | async"
+          routerLinkActive="active text-primary"
+          >Login</a
+        >
+
+        <a
+          *ngIf="isLoggedIn$ | async"
+          class="nav-link"
+          [routerLink]="[]"
+          (click)="logout()"
+          >Logout</a
+        >
+      </div>
+    </div>
+  </div>
+</nav>
