@@ -25,8 +25,8 @@ export class RxJsComponent {
   scan$: Observable<number>;
   reduce$: Observable<number>;
 
-  endStream1$ = new Subject();
-  endStream2$ = new Subject();
+  endStream1$: Subject<null> = new Subject();
+  endStream2$: Subject<null> = new Subject();
 
   constructor() {
     const nb1$ = this.numberForm
@@ -44,13 +44,9 @@ export class RxJsComponent {
     this.reduce$ = this.merge$.pipe(reduce((acc, val) => acc + (val ?? 0), 0));
   }
 
-  terminate1() {
-    this.endStream1$.next(null);
-    this.endStream1$.complete();
+  terminate(stream: Subject<null>) {
+    stream.next(null);
+    stream.complete();
   }
 
-  terminate2() {
-    this.endStream2$.next(null);
-    this.endStream2$.complete();
-  }
 }

@@ -15,7 +15,7 @@ import { ProductComponent } from './product/compnents/product/product.component'
 const routes: Routes = [
   {
     path: 'products',
-    component: ProductComponent
+    component: ProductComponent 
   },
   {
     path: 'cv',

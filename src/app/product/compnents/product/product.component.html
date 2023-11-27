@@ -1,14 +1,11 @@
-<div *ngIf="(products$ |async) == null" class="container">
-  ...loading
-</div>
-<div *ngIf="(products$ |async) != null" class="container">
-  <button class="btn btn-danger" (click)="showMore()">Load More</button>
-
+<div *ngIf="products$ | async as products; else loading">
+<div class="container">
+  
   <div class="alert alert-info">
-    Nombre de produits: {{ (products$ |async)?.length }}
+    Nombre de produits: {{ products.length }}
   </div>
   <div class="row">
-    <div class="col-4" *ngFor="let product of products$ | async">
+    <div class="col-4" *ngFor="let product of products">
       <app-item
       [title]="product.title"
       [path]="product.thumbnail"
@@ -17,5 +14,9 @@
     >
     </app-item>
     </div>
+    <button class="btn btn-primary" [disabled]="buttonDisabled" (click)="showMore()">Load More</button>
+
   </div>
 </div>
+</div>
+<ng-template #loading>Loading...</ng-template>

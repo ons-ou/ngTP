@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { ProductService } from '../../services/product/product.service';
-import { BehaviorSubject, Observable, scan, switchMap } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, concatMap, distinctUntilChanged, map, scan, switchMap, takeWhile } from 'rxjs';
 import { Product } from '../../models/product';
 
 @Component({
@@ -12,12 +12,15 @@ export class ProductComponent {
   productService = inject(ProductService);
   products$ = new Observable<Product[]>();
   numberElements$ = new BehaviorSubject<number>(0);
-
-  loading = true;
+  nbElements = 12;
+  buttonDisabled = false;
 
   constructor() {
     this.products$ = this.numberElements$.pipe(
-      switchMap((skip) => this.productService.getAll(12, skip)),
+      takeWhile((x)=> x<100),
+      concatMap((skip) => {
+        return this.productService.getAll(12, skip)
+      }),
       scan((acc, res)=> {
         return [...acc, ...res]
       })
@@ -25,8 +28,11 @@ export class ProductComponent {
   }
   
   showMore(): void {
-    const nextPage = this.numberElements$.value + 12;
-    if (nextPage <= 100) this.numberElements$.next(nextPage);
-    else this.numberElements$.complete();
+    this.numberElements$.next(this.nbElements);
+    this.nbElements = this.nbElements + 12;
+    if (this.nbElements >= 100){
+      this.buttonDisabled = true
+    }
   }
+ 
 }
