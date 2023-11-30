@@ -3,50 +3,29 @@ import { RouterModule, Routes } from '@angular/router';
 import { Nf404Component } from './components/nf404/nf404.component';
 import { MiniWordComponent } from './components/mini-word/mini-word.component';
 import { TextInputComponent } from './components/text-input/text-input.component';
-import { LoginComponent } from './components/login/login.component';
-import { CvComponent } from './cv/components/cv/cv.component';
-import { DetailsComponent } from './cv/components/details/details.component';
 import { RxJsComponent } from './components/rx-js/rx-js.component';
-import { cvResolver } from './cv/resolvers/cv/cv.resolver';
-import { detailsResolver } from './cv/resolvers/details/details.resolver';
-import { MasterDetailsComponent } from './cv/components/master-details/master-details.component';
+import { AuthModule } from './modules/auth/auth.module';
 import { ProductComponent } from './product/compnents/product/product.component';
+import { PreloadingStrategy } from './strategy/preloading-strategy.service';
 
 const routes: Routes = [
   {
     path: 'products',
-    component: ProductComponent 
+    component: ProductComponent,
   },
   {
     path: 'cv',
-    children: [
-      { path: '', component: CvComponent, resolve: { cvs: cvResolver } },
-      {
-        path: 'list',
-        component: MasterDetailsComponent,
-        children: [
-          {
-            path: ':id',
-            component: DetailsComponent,
-            resolve: { cv: detailsResolver },
-          },
-        ],
-      },
-      {
-        path: ':id',
-        component: DetailsComponent,
-        resolve: { cv: detailsResolver },
-      },
-
-    ],
+    loadChildren: () =>
+      import('./modules/cv/cv.module').then((m) => m.CvModule),
+      data: {preload: true}
   },
   {
     path: 'mini-word',
     component: MiniWordComponent,
   },
   {
-    path: 'login',
-    component: LoginComponent,
+    path: 'auth',
+    loadChildren: ()=> import('./modules/auth/auth.module').then((m)=> m.AuthModule),
   },
   {
     path: 'rxjs',
@@ -60,7 +39,9 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {
+    preloadingStrategy: PreloadingStrategy
+  })],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

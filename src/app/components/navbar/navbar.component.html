@@ -30,6 +30,18 @@
         >
       </div>
     </div>
+    <div *ngIf="isLoggedIn$ | async " class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a
+          class="nav-link"
+          aria-current="page"
+          [routerLink]="['cv', 'add']"
+          [routerLinkActiveOptions]="{ exact: true }"
+          routerLinkActive="active text-primary"
+          >Ajouter Cv</a
+        >
+      </div>
+    </div>
     <div class="collapse navbar-collapse" id="navbp">
       <div class="navbar-nav">
         <a

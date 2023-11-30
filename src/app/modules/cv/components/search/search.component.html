@@ -1,0 +1,6 @@
+<div class="bg-white">
+  <input [formControl]="searchName" type="text" class="form-control" />
+  <app-list 
+  [cvs]="cvs$ | async" 
+  [switchItemColor]="false"/>
+</div>
