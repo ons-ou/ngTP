@@ -21,6 +21,5 @@ export class LoginComponent {
     ).subscribe(
       () => this.router.navigate(['cv'])
     )
-
   }
 }
